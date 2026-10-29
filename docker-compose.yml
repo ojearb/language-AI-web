@@ -1,0 +1,25 @@
+services:
+  server:
+    build:
+      context: ./server
+    environment:
+      PORT: 3001
+      HOST: 0.0.0.0
+      DATA_FILE: /app/data/conversations.json
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-openai/gpt-4o-mini}
+      APP_NAME: Local AI Prompt Library
+      APP_URL: http://localhost:3000
+    volumes:
+      - ./server/data:/app/data
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./client
+    depends_on:
+      - server
+    ports:
+      - "127.0.0.1:3000:80"
+    restart: unless-stopped
+

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+test-results/
+.env
+**/data/*
+!/server/data/conversations.json
+!/server/data/.gitkeep
+*.tmp
+*.log
+.DS_Store
